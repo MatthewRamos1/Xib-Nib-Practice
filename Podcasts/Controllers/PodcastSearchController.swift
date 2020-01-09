@@ -78,6 +78,17 @@ extension PodcastSearchController: UITableViewDelegate {
       searchBar.resignFirstResponder()
     }
   }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let detailController = storyboard?.instantiateViewController(identifier: "PodcastDetailController") as? PodcastDetailController else {
+            fatalError("failed to downcast to PodcastDetailController")
+        }
+        
+        let podcast = podcasts[indexPath.row]
+        detailController.podcast = podcast
+        navigationController?.pushViewController(detailController, animated: true)
+        //
+    }
   
   // TODO: implemnet didSelectRowAt to pass podcast data to the detail view
   //       we need to add an identifier to the PodcastDetailController scene in the Main storyboard in order to get an instance of it
